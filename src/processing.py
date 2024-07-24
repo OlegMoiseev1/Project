@@ -13,10 +13,10 @@ def filter_by_state(operations: list, state: str = "EXECUTED") -> list[dict]:
 
 def sort_by_date(operations: list, reverse: bool = True) -> list[dict]:
     """Функция которая возвращает список по убыванию"""
-    sortted_operations = sorted(
+    sorted_operations = sorted(
         operations, key=lambda x: x["reverse"], reverse=reverse
     )
-    return sortted_operations
+    return sorted_operations
 
 
 if __name__ == "__main__":
