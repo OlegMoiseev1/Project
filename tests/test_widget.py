@@ -24,5 +24,5 @@ def test_mask_account_card(account_card, expected):
     ]
 )
 
-def test_get_date(input_data, expected):
-    assert get_data(input_data) == expected
+def test_get_date(input_date, expected):
+    assert get_data(input_date) == expected
