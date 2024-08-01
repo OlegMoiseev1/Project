@@ -1,17 +1,17 @@
-from src import masks
+from src.masks import get_mask_account, get_mask_card_number
 
 
-def mask_account_card(srting: str) -> str:
+def mask_account_card(card: str) -> str:
     """Функия для маскировки счетов и дат"""
-    if "Счет" in srting:
-        account = srting[-20:]
-        return srting[:20] + masks.get_mask_account(account)
+    if "Счет" in card:
+        mask_account = f"Счет {get_mask_account(card[:])}"
+        return mask_account
+    elif "Счет" not in card:
+        numbers = get_mask_card_number(card[-16:])
+        numbers_masks = card.replace(card[-16:], numbers)
+        return numbers_masks
     else:
-        number_card = "".join(srting[-16:].split())
-        return srting[:-16] + masks.get_mask_card_number(number_card)
-
-
-# print(mask_account_card('Maestro:1596837868705199'))
+        return "Данные не правильны"
 
 
 def get_data(info_data: str) -> str:
@@ -20,5 +20,6 @@ def get_data(info_data: str) -> str:
 
     return f"{data_day.split('-')[-1]}.{data_day.split('-')[-2]}.{data_day.split('-')[-3]}"
 
-
-# print(get_data(2018-07-11T02:26:18.671407))
+if __name__ == "__main__":
+    print(mask_account_card("Счет 40817810224010345624"))
+    print(get_data("2018 - 07 - 11T02: 26:18.671407"))
